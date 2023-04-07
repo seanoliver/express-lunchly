@@ -70,6 +70,7 @@ class Customer {
         FROM customers
         WHERE first_name ILIKE '%' || $1 || '%'
         OR  last_name ILIKE '%' || $1 || '%'
+        OR  (first_name || ' ' || last_name) ILIKE '%' || $1 || '%'
         ORDER BY last_name, first_name`,
         [term]
     );
