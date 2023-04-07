@@ -60,6 +60,7 @@ class Customer {
    * results. */
 
   static async getSearchResults(term) {
+
     const results = await db.query(
       `SELECT id,
               first_name AS "firstName",
@@ -72,10 +73,15 @@ class Customer {
         ORDER BY last_name, first_name`,
         [term]
     );
+
     return results.rows.map(c => new Customer(c));
   }
 
+  /** get list of top ten customers with most reservations, ordered descending
+  */
+
   static async getBestCustomers() {
+
     const results = await db.query(
       `SELECT c.id,
               c.first_name AS "firstName",
